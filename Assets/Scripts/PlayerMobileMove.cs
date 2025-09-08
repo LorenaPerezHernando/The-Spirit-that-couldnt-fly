@@ -6,42 +6,47 @@ public class PlayerMobileMove : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 6f;
     [SerializeField] float jumpForce = 8f;
+    [SerializeField] bool isGrounded;
     [SerializeField] Transform groundCheck;
-    [SerializeField] float groundRadius = 0.15f;
+    [SerializeField] float groundRadius = 0.3f;
     [SerializeField] LayerMask groundMask;
     [SerializeField] SpriteRenderer sprite;
     [SerializeField] Animator animator;
 
     Rigidbody2D rb;
     float moveX;
-    bool isGrounded;
 
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
     void Update()
     {
-        if (groundCheck) isGrounded =
-            Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundMask);
+        if (groundCheck) 
+            isGrounded =Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundMask);
 
-        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocityY);
+        // —— mover en X con linearVelocity (Unity 6)
+        var v = rb.linearVelocity;
+        v.x = moveX * moveSpeed;
+        rb.linearVelocity = v;
 
         if (sprite && Mathf.Abs(moveX) > 0.01f) sprite.flipX = moveX < 0;
-        if (animator) animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocityX));
+        if (animator) animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
     }
 
-    // Llamado por PlayerInput cuando cambia "Move"
-    void OnMove(InputValue v)
+    void OnMove(InputValue input)
     {
-        var m = v.Get<Vector2>();
+        var m = input.Get<Vector2>();
         moveX = Mathf.Clamp(m.x, -1f, 1f);
     }
 
-    // Llamado por PlayerInput cuando se pulsa "Jump"
-    void OnJump(InputValue v)
+    void OnJump(InputValue input)
     {
-        if (v.isPressed && isGrounded)
+        if (input.isPressed && isGrounded)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, 0f);
+            // resetear Y y aplicar salto
+            var v = rb.linearVelocity;
+            v.y = 0f;
+            rb.linearVelocity = v;
+
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             if (animator) animator.SetTrigger("Jump");
         }
