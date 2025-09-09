@@ -4,32 +4,54 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMobileMove : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 6f;
-    [SerializeField] float jumpForce = 8f;
-    [SerializeField] bool isGrounded;
-    [SerializeField] Transform groundCheck;
-    [SerializeField] float groundRadius = 0.3f;
-    [SerializeField] LayerMask groundMask;
-    [SerializeField] SpriteRenderer sprite;
-    [SerializeField] Animator animator;
+    [Header("Movement")]
+    //[SerializeField] private float moveSpeed = 6f;
+    [SerializeField] private float maxSpeed = 3.5f;         
+    [SerializeField] private float accelerationTime = 0.1f;
+    [SerializeField] private float decelerationTime = 0.1f;
 
-    Rigidbody2D rb;
-    float moveX;
+    private float moveX;
+    private float targetSpeed;   
+    private float currentSpeed;  
+    private float accel;
+
+    [Header("Jump")]
+    [SerializeField] private float jumpForce = 8f;
+    [SerializeField] private bool isGrounded;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundRadius = 0.3f;
+    [SerializeField] private LayerMask groundMask;
+
+    [Header("Visuals")]
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Animator animator;
+    private Rigidbody2D rb;
+
+    
 
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
     void Update()
     {
-        if (groundCheck) 
-            isGrounded =Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundMask);
+        if (groundCheck)
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundMask);
 
-        // —— mover en X con linearVelocity (Unity 6)
+        targetSpeed = moveX * maxSpeed;
+
+        accel = Mathf.Abs(targetSpeed) > 0.01f
+            ? maxSpeed / accelerationTime  
+            : maxSpeed / decelerationTime;  
+
+
+        currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, accel * Time.deltaTime);
+
+
         var v = rb.linearVelocity;
-        v.x = moveX * moveSpeed;
+        v.x = currentSpeed;
         rb.linearVelocity = v;
 
         if (sprite && Mathf.Abs(moveX) > 0.01f) sprite.flipX = moveX < 0;
-        if (animator) animator.SetFloat("Speed", Mathf.Abs(rb.linearVelocity.x));
+        if (animator) animator.SetFloat("Speed", Mathf.Abs(currentSpeed));
     }
 
     void OnMove(InputValue input)
