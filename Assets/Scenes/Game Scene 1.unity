@@ -1636,13 +1636,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12d621dbafc00d24cb7c6bf211b90b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 3.5
+  maxSpeed: 5
   accelerationTimeGround: 0.1
   decelerationTimeGround: 0.1
   accelerationTimeAir: 0.18
   decelerationTimeAir: 0.25
   isGrounded: 0
-  jumpForce: 30
+  jumpForce: 35
   groundCheck: {fileID: 1227733433}
   groundRadius: 0.7
   groundBox: {x: 0.72, y: 1.11}
