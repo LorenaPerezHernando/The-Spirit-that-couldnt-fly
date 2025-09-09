@@ -1,58 +1,79 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMobileMove : MonoBehaviour
 {
     [Header("Movement")]
-    //[SerializeField] private float moveSpeed = 6f;
-    [SerializeField] private float maxSpeed = 3.5f;         
-    [SerializeField] private float accelerationTime = 0.1f;
-    [SerializeField] private float decelerationTime = 0.1f;
+    [SerializeField] private float maxSpeed = 5f;
+    [SerializeField] private float accelerationTimeGround = 0.1f;
+    [SerializeField] private float decelerationTimeGround = 0.1f;
+    [SerializeField] private float accelerationTimeAir = 0.18f; 
+    [SerializeField] private float decelerationTimeAir = 0.25f;  // en aire: conserva inercia
 
     private float moveX;
-    private float targetSpeed;   
-    private float currentSpeed;  
-    private float accel;
+    private float targetSpeed;
+    private float currentSpeed;
 
     [Header("Jump")]
-    [SerializeField] private float jumpForce = 8f;
     [SerializeField] private bool isGrounded;
+    [SerializeField] private float jumpForce = 8f;
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundRadius = 0.3f;
+    [SerializeField] private float groundRadius = 0.30f;
     [SerializeField] private LayerMask groundMask;
+    private float lastGroundedTime; // para coyote
+    private float lastJumpPressed;  // para buffer
+    private int lastJumpFrame;    // frame en que se encoló
+    private int processedJumpFrame; // frame ya procesado
+
+    [Tooltip("Permite saltar un poquito después de salir del borde")]
+    [SerializeField] float coyoteTime = 0.10f;
+
 
     [Header("Visuals")]
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Animator animator;
     private Rigidbody2D rb;
 
-    
+
 
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
     void Update()
+    {        
+        sprite.flipX = moveX < 0f && Mathf.Abs(moveX) > 0.01f;
+        animator.SetFloat("Speed", Mathf.Abs(currentSpeed));
+    }
+
+    private void FixedUpdate()
     {
         if (groundCheck)
+        {
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundMask);
+            if (isGrounded) lastGroundedTime = Time.time;
+        }
+
 
         targetSpeed = moveX * maxSpeed;
 
-        accel = Mathf.Abs(targetSpeed) > 0.01f
-            ? maxSpeed / accelerationTime  
-            : maxSpeed / decelerationTime;  
+
+        bool hasTarget = Mathf.Abs(targetSpeed) > 0.01f;
+        float accelPerSec = hasTarget
+            ? maxSpeed / (isGrounded ? accelerationTimeGround : accelerationTimeAir)
+            : maxSpeed / (isGrounded ? decelerationTimeGround : decelerationTimeAir);
 
 
-        currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, accel * Time.deltaTime);
+        currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, accelPerSec * Time.fixedDeltaTime);
 
 
         var v = rb.linearVelocity;
         v.x = currentSpeed;
         rb.linearVelocity = v;
 
-        if (sprite && Mathf.Abs(moveX) > 0.01f) sprite.flipX = moveX < 0;
-        if (animator) animator.SetFloat("Speed", Mathf.Abs(currentSpeed));
+        TryConsumeJumpBuffer();
     }
+
 
     void OnMove(InputValue input)
     {
@@ -62,17 +83,44 @@ public class PlayerMobileMove : MonoBehaviour
 
     void OnJump(InputValue input)
     {
-        if (input.isPressed && isGrounded)
-        {
-            // resetear Y y aplicar salto
-            var v = rb.linearVelocity;
-            v.y = 0f;
-            rb.linearVelocity = v;
-
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            if (animator) animator.SetTrigger("Jump");
-        }
+        if (!input.isPressed) return;
+        QueueJump();
     }
+
+    void QueueJump()
+    {
+        lastJumpPressed = Time.time;
+        lastJumpFrame = Time.frameCount;
+    }
+
+    void TryConsumeJumpBuffer()
+    {
+        if (lastJumpPressed <= 0f) return;
+        if (processedJumpFrame == lastJumpFrame) return;
+
+
+            if (TryJump())
+                processedJumpFrame = lastJumpFrame;
+
+    }
+
+    bool TryJump()
+    {
+        bool canCoyote = Time.time - lastGroundedTime <= coyoteTime;
+        if (!isGrounded && !canCoyote) return false;
+
+        var v = rb.linearVelocity;
+        if (v.y < 0f) v.y = 0f;
+        rb.linearVelocity = v;
+
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        currentSpeed = rb.linearVelocity.x;
+
+        lastJumpPressed = 0f;
+        animator.SetTrigger("Jump");
+        return true;
+    }
+
 
     void OnDrawGizmosSelected()
     {
@@ -80,4 +128,10 @@ public class PlayerMobileMove : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
+
+    public void PressJump() { lastJumpPressed = Time.time; TryJump(); }
+
+
+void OnEnable() { EnhancedTouchSupport.Enable(); TouchSimulation.Enable(); }
+void OnDisable() { TouchSimulation.Disable(); EnhancedTouchSupport.Disable(); }
 }
