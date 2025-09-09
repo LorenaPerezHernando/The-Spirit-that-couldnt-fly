@@ -22,13 +22,11 @@ public class PlayerMobileMove : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundRadius = 0.30f;
     [SerializeField] private LayerMask groundMask;
-    private float lastGroundedTime; // para coyote
-    private float lastJumpPressed;  // para buffer
-    private int lastJumpFrame;    // frame en que se encoló
-    private int processedJumpFrame; // frame ya procesado
+    //private float lastGroundedTime; // para coyote
+    //private float lastJumpPressed;  // para buffer
+    //private int lastJumpFrame;    // frame en que se encoló
+    //private int processedJumpFrame; // frame ya procesado
 
-    [Tooltip("Permite saltar un poquito después de salir del borde")]
-    [SerializeField] float coyoteTime = 0.10f;
 
 
     [Header("Visuals")]
@@ -48,16 +46,13 @@ public class PlayerMobileMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (groundCheck)
-        {
+        if (groundCheck)       
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundMask);
-            if (isGrounded) lastGroundedTime = Time.time;
-        }
+   
+
 
 
         targetSpeed = moveX * maxSpeed;
-
-
         bool hasTarget = Mathf.Abs(targetSpeed) > 0.01f;
         float accelPerSec = hasTarget
             ? maxSpeed / (isGrounded ? accelerationTimeGround : accelerationTimeAir)
@@ -70,8 +65,6 @@ public class PlayerMobileMove : MonoBehaviour
         var v = rb.linearVelocity;
         v.x = currentSpeed;
         rb.linearVelocity = v;
-
-        TryConsumeJumpBuffer();
     }
 
 
@@ -84,30 +77,16 @@ public class PlayerMobileMove : MonoBehaviour
     void OnJump(InputValue input)
     {
         if (!input.isPressed) return;
-        QueueJump();
+        TryJump();
     }
 
-    void QueueJump()
+
+
+    
+
+    void TryJump()
     {
-        lastJumpPressed = Time.time;
-        lastJumpFrame = Time.frameCount;
-    }
-
-    void TryConsumeJumpBuffer()
-    {
-        if (lastJumpPressed <= 0f) return;
-        if (processedJumpFrame == lastJumpFrame) return;
-
-
-            if (TryJump())
-                processedJumpFrame = lastJumpFrame;
-
-    }
-
-    bool TryJump()
-    {
-        bool canCoyote = Time.time - lastGroundedTime <= coyoteTime;
-        if (!isGrounded && !canCoyote) return false;
+        if (!isGrounded) return;
 
         var v = rb.linearVelocity;
         if (v.y < 0f) v.y = 0f;
@@ -116,9 +95,8 @@ public class PlayerMobileMove : MonoBehaviour
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         currentSpeed = rb.linearVelocity.x;
 
-        lastJumpPressed = 0f;
         animator.SetTrigger("Jump");
-        return true;
+
     }
 
 
@@ -129,9 +107,7 @@ public class PlayerMobileMove : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
 
-    public void PressJump() { lastJumpPressed = Time.time; TryJump(); }
 
-
-void OnEnable() { EnhancedTouchSupport.Enable(); TouchSimulation.Enable(); }
-void OnDisable() { TouchSimulation.Disable(); EnhancedTouchSupport.Disable(); }
+    void OnEnable() { EnhancedTouchSupport.Enable(); TouchSimulation.Enable(); }
+    void OnDisable() { TouchSimulation.Disable(); EnhancedTouchSupport.Disable(); }
 }
