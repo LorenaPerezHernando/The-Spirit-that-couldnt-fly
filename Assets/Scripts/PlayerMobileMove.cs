@@ -45,7 +45,7 @@ public class PlayerMobileMove : MonoBehaviour
     private void FixedUpdate()
     {
         if (groundCheck)
-            isGrounded = Physics2D.OverlapBox(groundCheck.position, groundBox, groundMask);
+            isGrounded = Physics2D.OverlapBox(groundCheck.position, groundBox, 0f, groundMask) != null;
             //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundMask);
    
 
