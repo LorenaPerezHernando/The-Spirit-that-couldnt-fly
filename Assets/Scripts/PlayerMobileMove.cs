@@ -20,13 +20,10 @@ public class PlayerMobileMove : MonoBehaviour
     [SerializeField] private bool isGrounded;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundRadius = 0.30f;
+    //[SerializeField] private float groundRadius = 0.30f;
     [SerializeField] private Vector2 groundBox = new Vector2(0.60f, 0.08f);
     [SerializeField] private LayerMask groundMask;
-    //private float lastGroundedTime; // para coyote
-    //private float lastJumpPressed;  // para buffer
-    //private int lastJumpFrame;    // frame en que se encoló
-    //private int processedJumpFrame; // frame ya procesado
+
 
 
 
@@ -49,7 +46,7 @@ public class PlayerMobileMove : MonoBehaviour
     {
         if (groundCheck)
             isGrounded = Physics2D.OverlapBox(groundCheck.position, groundBox, groundMask);
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundMask);
+            //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundMask);
    
 
 
@@ -106,7 +103,7 @@ public class PlayerMobileMove : MonoBehaviour
     {
         if (!groundCheck) return;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
+        //Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
      
         Gizmos.DrawWireCube(groundCheck.position, (Vector3)groundBox);
     }
