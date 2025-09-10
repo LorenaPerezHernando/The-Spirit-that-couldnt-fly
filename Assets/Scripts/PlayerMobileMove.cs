@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.UIElements.Experimental;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMobileMove : MonoBehaviour
@@ -20,12 +21,16 @@ public class PlayerMobileMove : MonoBehaviour
     [SerializeField] private bool isGrounded;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private Transform groundCheck;
-    //[SerializeField] private float groundRadius = 0.30f;
     [SerializeField] private Vector2 groundBox = new Vector2(0.60f, 0.08f);
     [SerializeField] private LayerMask groundMask;
 
-
-
+    [Header("Dash")]
+    [SerializeField] private float dashSpeed = 10f;
+    [SerializeField] private float dashDuration = 1f;
+    [SerializeField] private bool isDashing;
+    private float dashTimer;
+    private int facing = 1; 
+    private int dashDir = 1;
 
     [Header("Visuals")]
     [SerializeField] private SpriteRenderer sprite;
@@ -37,19 +42,36 @@ public class PlayerMobileMove : MonoBehaviour
     void Awake() => rb = GetComponent<Rigidbody2D>();
 
     void Update()
-    {        
-        sprite.flipX = moveX < 0f && Mathf.Abs(moveX) > 0.01f;
+    {
+        if (Mathf.Abs(moveX) > 0.01f)
+            facing = moveX > 0 ? 1 : -1;
+
+        if (sprite) sprite.flipX = facing < 0;
         animator.SetFloat("Speed", Mathf.Abs(currentSpeed));
+
+        if (isDashing)
+        {
+            dashTimer -= Time.deltaTime;
+            if (dashTimer <= 0f)
+                isDashing = false;
+        }
+
     }
 
     private void FixedUpdate()
     {
         if (groundCheck)
             isGrounded = Physics2D.OverlapBox(groundCheck.position, groundBox, 0f, groundMask) != null;
-            //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundMask);
-   
 
 
+        if (isDashing)
+        {
+            var v = rb.linearVelocity;
+            v.x = dashDir * dashSpeed;   // velocidad fija de dash
+            rb.linearVelocity = v;
+            currentSpeed = v.x;
+            return;
+        }
 
         targetSpeed = moveX * maxSpeed;
         bool hasTarget = Mathf.Abs(targetSpeed) > 0.01f;
@@ -61,9 +83,9 @@ public class PlayerMobileMove : MonoBehaviour
         currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, accelPerSec * Time.fixedDeltaTime);
 
 
-        var v = rb.linearVelocity;
-        v.x = currentSpeed;
-        rb.linearVelocity = v;
+        var v2 = rb.linearVelocity;
+        v2.x = currentSpeed;
+        rb.linearVelocity = v2;
     }
 
 
@@ -79,10 +101,11 @@ public class PlayerMobileMove : MonoBehaviour
         TryJump();
     }
 
-
-
-    
-
+    void OnSprint(InputValue input)
+    {
+        if (!input.isPressed) return;
+        TryDash();
+    }
     void TryJump()
     {
         if (!isGrounded) return;
@@ -98,12 +121,34 @@ public class PlayerMobileMove : MonoBehaviour
 
     }
 
+    void TryDash()
+    {
+        if (isDashing) return; 
+
+
+        dashDir = Mathf.Abs(moveX) > 0.01f ? (moveX > 0 ? 1 : -1) : facing;
+        facing = dashDir;
+        isDashing = true;
+        dashTimer = dashDuration;
+
+
+        var v = rb.linearVelocity;
+        v.x = dashDir * dashSpeed;
+        rb.linearVelocity = v;
+        currentSpeed = v.x;
+
+        animator.SetTrigger("Dash");
+    }
+
+
+
+
 
     void OnDrawGizmosSelected()
     {
         if (!groundCheck) return;
         Gizmos.color = Color.yellow;
-        //Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
+
      
         Gizmos.DrawWireCube(groundCheck.position, (Vector3)groundBox);
     }
