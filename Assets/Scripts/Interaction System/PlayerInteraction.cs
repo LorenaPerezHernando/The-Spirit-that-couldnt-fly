@@ -1,6 +1,7 @@
 using Spirit.Interaction;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 namespace Spirit.Player
 {
@@ -42,6 +43,13 @@ namespace Spirit.Player
                 //Vfx para saber que puede interactuar
                 //VFX Objeto Iluminar
             }
+        }
+
+        public void Possess()
+        {
+            print("Interact");
+            PossessObject();
+            _originalSprite = _playerSprite;
         }
 
         private void OnInteract(InputValue input)
