@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TriggerAnim : MonoBehaviour
+public class TriggerAnimSwing : MonoBehaviour
 {                       
     [SerializeField] private Animator animator;
 

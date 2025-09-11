@@ -1,4 +1,3 @@
-using Spirit.Interaction;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +9,7 @@ namespace Spirit.Player
         [SerializeField] private GameObject _candidate;
         [SerializeField] private Transform _possesPos;
         [SerializeField] private bool _insideTrigger;
+        [SerializeField] private bool _possessed;
         private SpriteRenderer _playerSprite;
         
 
@@ -52,6 +52,8 @@ namespace Spirit.Player
             print("Interact");
             if(_insideTrigger)
                 PossessObject(_candidate);
+            if( _possessed)
+                ExitPossess();
 
         }
 
@@ -70,7 +72,7 @@ namespace Spirit.Player
 
         }
 
-        private void ExitPosses()
+        private void ExitPossess()
         {
 
         }
