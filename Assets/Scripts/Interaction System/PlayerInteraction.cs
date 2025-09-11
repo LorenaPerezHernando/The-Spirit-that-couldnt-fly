@@ -1,36 +1,35 @@
 using Spirit.Interaction;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 namespace Spirit.Player
 {
     public class PlayerInteraction : MonoBehaviour
     {
-        [SerializeField] private Sprite _playerSprite;
-        [SerializeField] private IPossessable _possessableObject;
-        private Sprite _originalSprite;
+        [SerializeField] private GameObject _currentPossessed;
+        [SerializeField] private GameObject _candidate;
+        [SerializeField] private Transform _possesPos;
+        [SerializeField] private bool _insideTrigger;
+        private SpriteRenderer _playerSprite;
+        
+
 
         private void Awake()
         {
-            _originalSprite = GetComponent<Sprite>();
+            _playerSprite = GetComponent<SpriteRenderer>();
+
         }
+
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("InteractableObject"))
             {
                 Debug.Log("Poses");
+                _candidate = collision.gameObject;
+                _insideTrigger = true;
                 //Vfx para saber que puede interactuar
                 //VFX Objeto Iluminar
-                _possessableObject = collision.GetComponent<IPossessable>();
-                if(_playerSprite == null)
-                {
-                    _playerSprite = collision.GetComponent<SpriteRenderer>().sprite;
-                }
-                
-
-
             }
         }
 
@@ -40,47 +39,40 @@ namespace Spirit.Player
             if (collider.CompareTag("InteractableObject"))
             {
                 print("EndTrigger");
+                _candidate = null;
+                _currentPossessed = null;
+                _insideTrigger= false;
                 //Vfx para saber que puede interactuar
                 //VFX Objeto Iluminar
             }
         }
 
-        public void Possess()
+        public void Possess() //OnButton
         {
             print("Interact");
-            PossessObject();
-            _originalSprite = _playerSprite;
+            if(_insideTrigger)
+                PossessObject(_candidate);
+
         }
 
-        private void OnInteract(InputValue input)
-        {
-            print("Interact");
-            if (!input.isPressed) return;
-            PossessObject();
-            print("Interact");
-            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-            spriteRenderer.sprite = _playerSprite;
-            //if (_possessableObject == null)
-            //{
-            //    print("StartPossess");
-                
-            //    _possessableObject.PossessStart();
 
-            //}
-            //if (_possessableObject != null)
-            //{
-            //    print("EndPoses");
-            //    // Soltar
-            //    _possessableObject.PossessEnd();
-            //    _possessableObject = null;
-
-            //    _playerSprite = _originalSprite;
-            //}
-        }
-
-        private void PossessObject()
+        private void PossessObject(GameObject obj)
         {
             print("Possesmethod");
+            _currentPossessed = obj;
+
+            _playerSprite.enabled = false;
+            obj.transform.SetParent(_possesPos);
+
+            obj.transform.localPosition = Vector3.zero;
+            obj.transform.localRotation = Quaternion.identity;
+
+
+        }
+
+        private void ExitPosses()
+        {
+
         }
 
         private void OnAttack(InputValue input)
