@@ -5,12 +5,17 @@ namespace Spirit.Player
 {
     public class PlayerInteraction : MonoBehaviour
     {
+        [Header("Possess Action")]
         [SerializeField] private GameObject _currentPossessed;
         [SerializeField] private GameObject _candidate;
         [SerializeField] private Transform _possesPos;
-        [SerializeField] private bool _insideTrigger;
+        [SerializeField] private bool _insidePossesTrigger;
         [SerializeField] private bool _possessed;
         private SpriteRenderer _playerSprite;
+
+        [Header("Next Scene")]
+        [SerializeField] private bool _insideSceneTrigger;
+        [SerializeField] private SceneLoader _sceneLoaderPortal;
         
 
 
@@ -27,9 +32,14 @@ namespace Spirit.Player
             {
                 Debug.Log("Poses");
                 _candidate = collision.gameObject;
-                _insideTrigger = true;
+                _insidePossesTrigger = true;
                 //Vfx para saber que puede interactuar
                 //VFX Objeto Iluminar
+            }
+            if (collision.CompareTag("Portal"))
+            {
+                _sceneLoaderPortal = collision.gameObject.GetComponent<SceneLoader>();
+                _insideSceneTrigger = true;
             }
         }
 
@@ -41,19 +51,27 @@ namespace Spirit.Player
                 print("EndTrigger");
                 _candidate = null;
                 _currentPossessed = null;
-                _insideTrigger= false;
+                _insidePossesTrigger= false;
                 //Vfx para saber que puede interactuar
                 //VFX Objeto Iluminar
+            }
+            if (collider.CompareTag("Portal"))
+            {
+                _insideSceneTrigger = false;
+                _sceneLoaderPortal= null;
             }
         }
 
         public void Possess() //OnButton
         {
             print("Interact");
-            if(_insideTrigger)
+            if(_insidePossesTrigger)
                 PossessObject(_candidate);
             if( _possessed)
                 ExitPossess();
+
+            if(_insideSceneTrigger)
+                PortalTrigger();
 
         }
 
@@ -75,6 +93,11 @@ namespace Spirit.Player
         private void ExitPossess()
         {
 
+        }
+
+        private void PortalTrigger()
+        {
+            _sceneLoaderPortal.LoadSceneByIndex(_sceneLoaderPortal._sceneToLoad);
         }
 
         private void OnAttack(InputValue input)

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FxTemporaire
   - InteractableObject
+  - Portal
   layers:
   - Default
   - TransparentFX
