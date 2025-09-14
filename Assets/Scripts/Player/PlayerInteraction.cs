@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,7 +16,7 @@ namespace Spirit.Player
 
         [Header("Next Scene")]
         [SerializeField] private bool _insideSceneTrigger;
-        [SerializeField] private SceneLoader _sceneLoaderPortal;
+         private SceneLoader _sceneLoaderPortal;
         
 
 
@@ -50,7 +51,6 @@ namespace Spirit.Player
             {
                 print("EndTrigger");
                 _candidate = null;
-                _currentPossessed = null;
                 _insidePossesTrigger= false;
                 //Vfx para saber que puede interactuar
                 //VFX Objeto Iluminar
@@ -65,12 +65,17 @@ namespace Spirit.Player
         public void Possess() //OnButton
         {
             print("Interact");
-            if(_insidePossesTrigger)
+            if (_possessed)
+            {
+                ExitPossessed();
+            }
+            else if (_insidePossesTrigger && _candidate != null)
+            {
                 PossessObject(_candidate);
-            if( _possessed)
-                ExitPossess();
+            }
 
-            if(_insideSceneTrigger)
+
+            if (_insideSceneTrigger)
                 PortalTrigger();
 
         }
@@ -86,14 +91,27 @@ namespace Spirit.Player
 
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
+            _possessed = true;
 
 
         }
 
-        private void ExitPossess()
+        private void ExitPossessed()
         {
 
+            //if (_currentPossessed == null) yield return;
+
+            _possessed = false;
+            print("Soltar objeto");
+            _currentPossessed.transform.SetParent(null);
+
+            _playerSprite.enabled = true;
+
+            _currentPossessed = null;
+            
         }
+
+
 
         private void PortalTrigger()
         {
