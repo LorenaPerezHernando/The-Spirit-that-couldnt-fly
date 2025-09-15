@@ -44,6 +44,23 @@ namespace Spirit.Player
             }
         }
 
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            if (collision.CompareTag("InteractableObject"))
+            {
+                Debug.Log("Poses");
+                _candidate = collision.gameObject;
+                _insidePossesTrigger = true;
+                //Vfx para saber que puede interactuar
+                //VFX Objeto Iluminar
+            }
+            if (collision.CompareTag("Portal"))
+            {
+                _sceneLoaderPortal = collision.gameObject.GetComponent<SceneLoader>();
+                _insideSceneTrigger = true;
+            }
+        }
+
 
         private void OnTriggerExit2D(Collider2D collider)
         {
@@ -62,6 +79,18 @@ namespace Spirit.Player
             }
         }
 
+        public void BurnableObject() //OnButtonAttack
+        {
+            if(_insidePossesTrigger && _candidate != null)
+            {
+                _candidate.GetComponentInChildren<ParticleSystem>().Play();
+                _candidate.GetComponent<Collider2D>().enabled = false;
+                //Aura --
+            }
+
+        }
+
+
         public void Possess() //OnButton
         {
             print("Interact");
@@ -74,6 +103,7 @@ namespace Spirit.Player
                 PossessObject(_candidate);
             }
 
+            if(gameObject.CompareTag("I"))
 
             if (_insideSceneTrigger)
                 PortalTrigger();
