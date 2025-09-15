@@ -120,18 +120,18 @@ namespace Spirit.Player
 
         public void BurnableObject() //OnButtonAttack
         {
-            if(_insidePossesTrigger && _candidate != null)
+            if(_insidePossesTrigger && _candidate != null) //Burnable & Possessable Object
             {
-                _candidate.GetComponentInChildren<SpriteRenderer>().enabled = true;
+                _candidate.GetComponentInChildren<ParticleSystem>().Play();
                 //_candidate.GetComponent<Collider2D>().enabled = false;
                 Destroy(_candidate, 4f);
                 
                 print("Aura --");
             }
-            if(_candidateBurnOnly != null)
+            if(_candidateBurnOnly != null) //Only burn for lights
             {
                 _candidateBurnOnly.GetComponent<SpriteRenderer>().enabled = true;
-
+                //Todo Aura ++
                 StartCoroutine(DissableCollider());
 
             }
@@ -150,6 +150,7 @@ namespace Spirit.Player
             if(_candidatePossesOnly != null)
             {
                 PossessObject(_candidatePossesOnly);
+                return;
             }
             print("Interact");
             if (_possessed)
@@ -159,9 +160,10 @@ namespace Spirit.Player
             else if (_insidePossesTrigger && _candidate != null)
             {
                 PossessObject(_candidate);
+                return;
             }
 
-            if (_insideSceneTrigger)
+            if (_insideSceneTrigger && _candidate == null)
                 PortalTrigger();
 
         }
