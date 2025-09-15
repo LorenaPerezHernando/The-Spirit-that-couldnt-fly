@@ -83,9 +83,9 @@ namespace Spirit.Player
         {
             if(_insidePossesTrigger && _candidate != null)
             {
-                _candidate.GetComponentInChildren<ParticleSystem>().Play();
+                _candidate.GetComponentInChildren<SpriteRenderer>().enabled = true;
                 _candidate.GetComponent<Collider2D>().enabled = false;
-                //Aura --
+                print("Aura --");
             }
 
         }
