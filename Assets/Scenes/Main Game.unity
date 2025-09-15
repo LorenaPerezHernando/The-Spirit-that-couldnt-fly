@@ -2570,7 +2570,6 @@ MonoBehaviour:
   _insidePossesTrigger: 0
   _possessed: 0
   _insideSceneTrigger: 0
-  _sceneLoaderPortal: {fileID: 0}
 --- !u!1 &1238047738
 GameObject:
   m_ObjectHideFlags: 0
@@ -3974,7 +3973,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5059849853620695794, guid: 78a5610f9fbca8c409a67ad89697cf0f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
