@@ -6,13 +6,18 @@ namespace Spirit.Player
 {
     public class PlayerInteraction : MonoBehaviour
     {
-        [Header("Possess Action")]
+        [Header("Interactable Action")]
         [SerializeField] private GameObject _currentPossessed;
         [SerializeField] private GameObject _candidate;
         [SerializeField] private Transform _possesPos;
         [SerializeField] private bool _insidePossesTrigger;
         [SerializeField] private bool _possessed;
         private SpriteRenderer _playerSprite;
+
+        [Header("Burn or Possess Only")]
+        [SerializeField] private GameObject _candidateBurnOnly;
+        [SerializeField] private SpriteRenderer _candidateBurnChild;
+        [SerializeField] private GameObject _candidatePossesOnly;
 
         [Header("Next Scene")]
         [SerializeField] private bool _insideSceneTrigger;
@@ -37,6 +42,16 @@ namespace Spirit.Player
                 //Vfx para saber que puede interactuar
                 //VFX Objeto Iluminar
             }
+
+            if (collision.CompareTag("OnlyBurnableObject"))
+            {
+                _candidateBurnOnly = collision.gameObject;
+                _candidateBurnChild = collision.gameObject.GetComponentInChildren<SpriteRenderer>();
+            }
+            if (collision.CompareTag("OnlyPossessObject"))
+            {
+                _candidatePossesOnly = collision.gameObject;                                                                        
+            }
             if (collision.CompareTag("Portal"))
             {
                 _sceneLoaderPortal = collision.gameObject.GetComponent<SceneLoader>();
@@ -53,6 +68,17 @@ namespace Spirit.Player
                 _insidePossesTrigger = true;
                 //Vfx para saber que puede interactuar
                 //VFX Objeto Iluminar
+            }
+            if (collision.CompareTag("OnlyBurnableObject"))
+            {
+                _candidateBurnOnly = collision.gameObject;
+                _candidateBurnChild = collision.gameObject.GetComponentInChildren<SpriteRenderer>();
+                //TODO Vfx red
+            }
+            if (collision.CompareTag("OnlyPossessObject"))
+            {
+                _candidatePossesOnly = collision.gameObject;
+                //Todo vfx blue
             }
             if (collision.CompareTag("Portal"))
             {
@@ -72,6 +98,17 @@ namespace Spirit.Player
                 //Vfx para saber que puede interactuar
                 //VFX Objeto Iluminar
             }
+            if (collider.CompareTag("OnlyBurnableObject"))
+            {
+                _candidateBurnOnly = null;
+                
+                //TODO Vfx red
+            }
+            if (collider.CompareTag("OnlyPossessObject"))
+            {
+                _candidatePossesOnly = null;
+                //Todo vfx blue
+            }
             if (collider.CompareTag("Portal"))
             {
                 _insideSceneTrigger = false;
@@ -79,20 +116,41 @@ namespace Spirit.Player
             }
         }
 
+
+
         public void BurnableObject() //OnButtonAttack
         {
             if(_insidePossesTrigger && _candidate != null)
             {
                 _candidate.GetComponentInChildren<SpriteRenderer>().enabled = true;
-                _candidate.GetComponent<Collider2D>().enabled = false;
+                //_candidate.GetComponent<Collider2D>().enabled = false;
+                Destroy(_candidate, 4f);
+                
                 print("Aura --");
             }
+            if(_candidateBurnOnly != null)
+            {
+                _candidateBurnOnly.GetComponent<SpriteRenderer>().enabled = true;
 
+                StartCoroutine(DissableCollider());
+
+            }
+
+        }
+
+        private IEnumerator DissableCollider()
+        {
+            yield return new WaitForSeconds(2f);
+            _candidateBurnOnly.GetComponent<Collider2D>().enabled = false;
         }
 
 
         public void Possess() //OnButton
         {
+            if(_candidatePossesOnly != null)
+            {
+                PossessObject(_candidatePossesOnly);
+            }
             print("Interact");
             if (_possessed)
             {
@@ -102,8 +160,6 @@ namespace Spirit.Player
             {
                 PossessObject(_candidate);
             }
-
-            if(gameObject.CompareTag("I"))
 
             if (_insideSceneTrigger)
                 PortalTrigger();
@@ -128,9 +184,6 @@ namespace Spirit.Player
 
         private void ExitPossessed()
         {
-
-            //if (_currentPossessed == null) yield return;
-
             _possessed = false;
             print("Soltar objeto");
             _currentPossessed.transform.SetParent(null);
