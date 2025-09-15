@@ -8,6 +8,7 @@ namespace Spirit.Player
     {
         [Header("Interactable Action")]
         [SerializeField] private GameObject _currentPossessed;
+        [SerializeField] private Collider2D _currentPossesedCollider;
         [SerializeField] private GameObject _candidate;
         [SerializeField] private Transform _possesPos;
         [SerializeField] private bool _insidePossesTrigger;
@@ -50,7 +51,8 @@ namespace Spirit.Player
             }
             if (collision.CompareTag("OnlyPossessObject"))
             {
-                _candidatePossesOnly = collision.gameObject;                                                                        
+                _candidatePossesOnly = collision.gameObject;
+                _insidePossesTrigger = true;
             }
             if (collision.CompareTag("Portal"))
             {
@@ -61,6 +63,7 @@ namespace Spirit.Player
 
         private void OnTriggerStay2D(Collider2D collision)
         {
+
             if (collision.CompareTag("InteractableObject"))
             {
                 Debug.Log("Poses");
@@ -73,11 +76,13 @@ namespace Spirit.Player
             {
                 _candidateBurnOnly = collision.gameObject;
                 _candidateBurnChild = collision.gameObject.GetComponentInChildren<SpriteRenderer>();
+                
                 //TODO Vfx red
             }
             if (collision.CompareTag("OnlyPossessObject"))
             {
                 _candidatePossesOnly = collision.gameObject;
+                _insidePossesTrigger = true;
                 //Todo vfx blue
             }
             if (collision.CompareTag("Portal"))
@@ -147,19 +152,31 @@ namespace Spirit.Player
 
         public void Possess() //OnButton
         {
-            if(_candidatePossesOnly != null)
-            {
-                PossessObject(_candidatePossesOnly);
-                return;
-            }
             print("Interact");
             if (_possessed)
             {
-                ExitPossessed();
+                GameObject newTarget = _candidatePossesOnly != null ? _candidatePossesOnly
+                    : (_candidate != null && _candidate != _currentPossessed ? _candidate : null);
+
+                if (newTarget != null)
+                {
+                   ExitPossessed();
+                   PossessObject(newTarget);
+
+                }
+                else
+                {
+                    ExitPossessed();
+                }
             }
             else if (_insidePossesTrigger && _candidate != null)
             {
                 PossessObject(_candidate);
+                return;
+            }
+            else if(_insidePossesTrigger && _candidatePossesOnly != null)
+            {
+                PossessObject (_candidatePossesOnly);
                 return;
             }
 
@@ -173,13 +190,16 @@ namespace Spirit.Player
         {
             print("Possesmethod");
             _currentPossessed = obj;
+            _possessed = true;
+
+            _currentPossesedCollider = obj.GetComponent<Collider2D>();
+            _currentPossesedCollider.enabled = false;
 
             _playerSprite.enabled = false;
             obj.transform.SetParent(_possesPos);
 
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
-            _possessed = true;
 
 
         }
@@ -188,11 +208,20 @@ namespace Spirit.Player
         {
             _possessed = false;
             print("Soltar objeto");
+            _currentPossesedCollider.enabled = true;
             _currentPossessed.transform.SetParent(null);
 
             _playerSprite.enabled = true;
 
             _currentPossessed = null;
+
+            //if(_candidate || _candidatePossesOnly)
+            //{
+            //    GameObject newTarget = _candidatePossesOnly != null
+            //        ? _candidatePossesOnly
+            //        : (_candidate != null && _candidate != _currentPossessed ? _candidate : null);
+            //    PossessObject(newTarget);
+            //}
             
         }
 
