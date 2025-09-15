@@ -7,6 +7,8 @@ TagManager:
   - FxTemporaire
   - InteractableObject
   - Portal
+  - OnlyBurnableObject
+  - OnlyPossessObject
   layers:
   - Default
   - TransparentFX
