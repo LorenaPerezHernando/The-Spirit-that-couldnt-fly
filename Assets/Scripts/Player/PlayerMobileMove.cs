@@ -23,6 +23,9 @@ public class PlayerMobileMove : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Vector2 groundBox = new Vector2(0.60f, 0.08f);
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private int maxJumps = 1; 
+    private int jumpCount;
+    private bool wasGrounded;
 
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 10f;
@@ -62,7 +65,8 @@ public class PlayerMobileMove : MonoBehaviour
     {
         if (groundCheck)
             isGrounded = Physics2D.OverlapBox(groundCheck.position, groundBox, 0f, groundMask) != null;
-
+        if (isGrounded && !wasGrounded)
+            jumpCount = 0;
 
         if (isDashing)
         {
@@ -108,7 +112,8 @@ public class PlayerMobileMove : MonoBehaviour
     }
     void TryJump()
     {
-        if (!isGrounded) return;
+        if (!isGrounded && jumpCount >= maxJumps) return;
+        //if (!isGrounded) return;
 
         var v = rb.linearVelocity;
         if (v.y < 0f) v.y = 0f;
@@ -116,6 +121,9 @@ public class PlayerMobileMove : MonoBehaviour
 
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         currentSpeed = rb.linearVelocity.x;
+
+        if (!isGrounded)
+            jumpCount++;
 
         animator.SetTrigger("Jump");
 
