@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
-using UnityEngine.UIElements.Experimental;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMobileMove : MonoBehaviour
@@ -90,6 +89,8 @@ public class PlayerMobileMove : MonoBehaviour
         var v2 = rb.linearVelocity;
         v2.x = currentSpeed;
         rb.linearVelocity = v2;
+
+        wasGrounded = isGrounded;
     }
 
 
@@ -115,12 +116,15 @@ public class PlayerMobileMove : MonoBehaviour
         if (!isGrounded && jumpCount >= maxJumps) return;
         //if (!isGrounded) return;
 
-        var v = rb.linearVelocity;
-        if (v.y < 0f) v.y = 0f;
-        rb.linearVelocity = v;
+        var vel = rb.linearVelocity;
+        vel.y = 0;
+        vel.y = jumpForce;
+        rb.linearVelocity = vel;
 
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        currentSpeed = rb.linearVelocity.x;
+        currentSpeed = vel.x;
+       
+        //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        //currentSpeed = rb.linearVelocity.x;
 
         if (!isGrounded)
             jumpCount++;
