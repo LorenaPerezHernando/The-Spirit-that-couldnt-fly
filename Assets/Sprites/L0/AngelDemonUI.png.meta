@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 449b39da6a638604495a7f5dacb55ab9
+guid: c7038d5467cd0e84e88e80dcd22ee1e4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1174822213631238589
-    second: 1000022773_0
+      213: 5967975594850704204
+    second: AngelDemonUI_0
   - first:
-      213: 2759705784896054008
-    second: 1000022773_1
+      213: 2690884723556910413
+    second: AngelDemonUI_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 1000022773_0
+      name: AngelDemonUI_0
       rect:
         serializedVersion: 2
-        x: 1630
-        y: 1416
-        width: 236
-        height: 320
+        x: 55
+        y: 64
+        width: 911
+        height: 905
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 34e9542db6132bfe0800000000000000
-      internalID: -1174822213631238589
+      spriteID: c4bd64f0f2282d250800000000000000
+      internalID: 5967975594850704204
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1000022773_1
+      name: AngelDemonUI_1
       rect:
         serializedVersion: 2
-        x: 1884
-        y: 1418
+        x: 55
+        y: 541
         width: 6
-        height: 6
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8f2e1513ac17c4620800000000000000
-      internalID: 2759705784896054008
+      spriteID: d45822f2661f75520800000000000000
+      internalID: 2690884723556910413
       vertices: []
       indices: 
       edges: []
@@ -163,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      1000022773_0: -1174822213631238589
-      1000022773_1: 2759705784896054008
+      AngelDemonUI_0: 5967975594850704204
+      AngelDemonUI_1: 2690884723556910413
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
