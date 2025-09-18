@@ -180,8 +180,11 @@ namespace Spirit.Player
                 return;
             }
 
-            if (_insideSceneTrigger && _candidate == null)
+            if (_insideSceneTrigger)
+            {
                 PortalTrigger();
+                print("portal");
+            }
 
         }
 
