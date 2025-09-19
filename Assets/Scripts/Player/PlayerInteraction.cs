@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Spirit.Player
 {
@@ -16,6 +17,7 @@ namespace Spirit.Player
         private SpriteRenderer _playerSprite;
 
         [Header("Burn or Possess Only")]
+        [SerializeField] private Slider _badSlider;
         [SerializeField] private GameObject _candidateBurnOnly;
         [SerializeField] private SpriteRenderer _candidateBurnChild;
         [SerializeField] private GameObject _candidatePossesOnly;
@@ -127,16 +129,17 @@ namespace Spirit.Player
         {
             if(_insidePossesTrigger && _candidate != null) //Burnable & Possessable Object
             {
+                if(_candidate.GetComponentInChildren<ParticleSystem>() != null)
                 _candidate.GetComponentInChildren<ParticleSystem>().Play();
-                //_candidate.GetComponent<Collider2D>().enabled = false;
                 Destroy(_candidate, 4f);
-                
+                _badSlider.value = _badSlider.value + 0.7f;
+                //TODO Text con Aura -- 
                 print("Aura --");
             }
             if(_candidateBurnOnly != null) //Only burn for lights
             {
                 _candidateBurnOnly.GetComponent<SpriteRenderer>().enabled = true;
-                //Todo Aura ++
+                //Todo Text con Aura ++
                 StartCoroutine(DissableCollider());
 
             }
