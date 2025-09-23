@@ -20,9 +20,10 @@ public class GoodUI : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision == _objectivePos)
-        {           
-            _goodSlider.value = _goodSlider.value + _valueToAdd;
+        {
+
             //TODO ADD TEXT QUE DIGA QUE AURA ++ 
+            _goodSlider.value = _goodSlider.value + _valueToAdd;
             print("Aura ++");
             _objectivePos.GetComponentInChildren<SpriteRenderer>().enabled = true;
             StartCoroutine(DelayDestroy());
@@ -31,6 +32,7 @@ public class GoodUI : MonoBehaviour
 
     IEnumerator DelayDestroy()
     {
+        
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
