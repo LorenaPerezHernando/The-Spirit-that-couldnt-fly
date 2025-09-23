@@ -3,7 +3,6 @@ using UnityEngine;
 public class RespawnPlatform : MonoBehaviour
 {
     [SerializeField] private Transform _respawnPos;
-    [SerializeField] private string _respawnName;
     [SerializeField] private GameObject[] _books;
     [SerializeField] private Vector2[] _initialBookPos;
 
@@ -17,7 +16,7 @@ public class RespawnPlatform : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(_respawnName))
+        if (collision.gameObject.CompareTag("Player"))
         {
             collision.transform.position = _respawnPos.position;
             ResetBooks();
