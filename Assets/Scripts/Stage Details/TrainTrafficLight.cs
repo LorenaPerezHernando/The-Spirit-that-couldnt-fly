@@ -15,7 +15,7 @@ public class TrainTrafficLight : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            StartTrain();
+            StartCoroutine(StartTrain());
         }
     }
 
@@ -24,6 +24,8 @@ public class TrainTrafficLight : MonoBehaviour
         _renderer.color = Color.yellow;
         yield return new WaitForSeconds(1);
         _renderer.color = Color.green;
-        _follower.enabled = true; 
+        yield return new WaitForSeconds(1);
+        _follower.enabled = true;
+        _follower.wrapMode = SplineFollower.Wrap.PingPong;
     }
 }
