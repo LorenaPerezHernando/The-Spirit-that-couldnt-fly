@@ -19,20 +19,23 @@ public class GoodUI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision == _objectivePos)
+        if(collision.CompareTag("InteractableObject") || collision.CompareTag("OnlyPossesObject") 
+            == _objectivePos)
         {
 
             //TODO ADD TEXT QUE DIGA QUE AURA ++ 
-            _goodSlider.value = _goodSlider.value + _valueToAdd;
-            print("Aura ++");
+            
             _objectivePos.GetComponentInChildren<SpriteRenderer>().enabled = true;
             StartCoroutine(DelayDestroy());
         }
     }
 
+
+
     IEnumerator DelayDestroy()
     {
-        
+        _goodSlider.value = _goodSlider.value + _valueToAdd;
+        print("Aura ++");
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }

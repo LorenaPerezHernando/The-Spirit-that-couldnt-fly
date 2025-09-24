@@ -15,6 +15,7 @@ public class TrainActivator : MonoBehaviour
         if (_isStartTrigger)
         {
             // Arranca hacia adelante
+            _follower.enabled = true;
             _follower.direction = Spline.Direction.Forward;
             _follower.follow = true;
             _sprite.flipX = false; // ajusta según tu sprite
