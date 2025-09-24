@@ -19,8 +19,7 @@ public class GoodUI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("InteractableObject") || collision.CompareTag("OnlyPossesObject") 
-            == _objectivePos)
+        if(collision == _objectivePos)
         {
 
             //TODO ADD TEXT QUE DIGA QUE AURA ++ 

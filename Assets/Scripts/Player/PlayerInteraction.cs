@@ -97,7 +97,7 @@ namespace Spirit.Player
 
         private void OnTriggerExit2D(Collider2D collider)
         {
-            if (collider.CompareTag("InteractableObject"))
+            if (collider.CompareTag("InteractableObject") && _candidate == collider.gameObject)
             {
                 print("EndTrigger");
                 _candidate = null;
@@ -105,13 +105,13 @@ namespace Spirit.Player
                 //Vfx para saber que puede interactuar
                 //VFX Objeto Iluminar
             }
-            if (collider.CompareTag("OnlyBurnableObject"))
+            if (collider.CompareTag("OnlyBurnableObject") && _candidatePossesOnly == collider.gameObject)
             {
                 _candidateBurnOnly = null;
                 
                 //TODO Vfx red
             }
-            if (collider.CompareTag("OnlyPossessObject"))
+            if (collider.CompareTag("OnlyPossessObject") && _candidateBurnOnly == collider.gameObject)
             {
                 _candidatePossesOnly = null;
                 //Todo vfx blue
@@ -139,8 +139,9 @@ namespace Spirit.Player
             if(_candidateBurnOnly != null) //Only burn for lights
             {
                 _candidateBurnOnly.GetComponent<SpriteRenderer>().enabled = true;
-                //Todo Text con Aura ++
+                //TODO Text con Aura ++
                 StartCoroutine(DissableCollider());
+                
 
             }
 
@@ -155,32 +156,45 @@ namespace Spirit.Player
 
         public void Possess() //OnButton
         {
-            print("Interact");
-            if (_possessed)
+            if (_possessed && _currentPossessed != null)
             {
-                GameObject newTarget = _candidatePossesOnly != null ? _candidatePossesOnly
-                    : (_candidate != null && _candidate != _currentPossessed ? _candidate : null);
-
-                if (newTarget != null)
+                var deliver = _currentPossessed.GetComponent<DeliverObject>();
+                if (deliver != null && deliver.CanDeliver)
                 {
-                   ExitPossessed();
-                   PossessObject(newTarget);
-
+                    deliver.TryDeliver(this);  // corre la corrutina en este Mono
                 }
-                else
-                {
-                    ExitPossessed();
-                }
-            }
-            else if (_insidePossesTrigger && _candidate != null)
-            {
-                PossessObject(_candidate);
+                ExitPossessed();               // soltar/terminar siempre tras pulsar
                 return;
             }
-            else if(_insidePossesTrigger && _candidatePossesOnly != null)
+            //print("Interact");
+            //if (_possessed)
+            //{
+            //    GameObject newTarget = _candidatePossesOnly != null ? _candidatePossesOnly
+            //        : (_candidate != null && _candidate != _currentPossessed ? _candidate : null);
+
+            //    if (newTarget != null)
+            //    {
+            //       ExitPossessed();
+            //       PossessObject(newTarget);
+
+            //    }
+            //    else
+            //    {
+            //        ExitPossessed();
+            //    }
+            //}
+            if (_insidePossesTrigger)
             {
-                PossessObject (_candidatePossesOnly);
-                return;
+                if (_candidatePossesOnly != null)
+                {
+                    PossessObject(_candidatePossesOnly);
+                    return;
+                }
+                if (_candidate != null)
+                {
+                    PossessObject(_candidate);
+                    return;
+                }
             }
 
             if (_insideSceneTrigger)
@@ -198,8 +212,14 @@ namespace Spirit.Player
             _currentPossessed = obj;
             _possessed = true;
 
+            //_currentPossesedCollider = obj.GetComponent<Collider2D>();
+            //_currentPossesedCollider.enabled = false;
+
+            var deliver = _currentPossessed.GetComponent<DeliverObject>();
+            if (deliver) deliver.SetPossessed(true);
+
             _currentPossesedCollider = obj.GetComponent<Collider2D>();
-            _currentPossesedCollider.enabled = false;
+            if (_currentPossesedCollider) _currentPossesedCollider.enabled = true;
 
             _playerSprite.enabled = false;
             obj.transform.SetParent(_possesPos);
@@ -214,21 +234,27 @@ namespace Spirit.Player
         {
             _possessed = false;
             print("Soltar objeto");
-            _currentPossesedCollider.enabled = true;
-            _currentPossessed.transform.SetParent(null);
+            //_currentPossesedCollider.enabled = true;
+            //_currentPossessed.transform.SetParent(null);
 
-            _playerSprite.enabled = true;
+            //_playerSprite.enabled = true;
 
+            //_currentPossessed = null;
+            if (_currentPossessed)
+            {
+                var deliver = _currentPossessed.GetComponent<DeliverObject>();
+                if (deliver) deliver.SetPossessed(false);
+            }
+
+            if (_currentPossesedCollider) _currentPossesedCollider.enabled = true;
+
+            if (_currentPossessed) _currentPossessed.transform.SetParent(null);
+
+
+            if (_playerSprite) _playerSprite.enabled = true;
             _currentPossessed = null;
 
-            //if(_candidate || _candidatePossesOnly)
-            //{
-            //    GameObject newTarget = _candidatePossesOnly != null
-            //        ? _candidatePossesOnly
-            //        : (_candidate != null && _candidate != _currentPossessed ? _candidate : null);
-            //    PossessObject(newTarget);
-            //}
-            
+
         }
 
 
