@@ -5,8 +5,10 @@ using UnityEngine.UI;
 public class DeliverObject : MonoBehaviour
 {
     [Header("Objetivo")]
-    [SerializeField] private Collider2D objectiveTrigger;      // zona de entrega (Trigger)
-    [SerializeField] private GameObject objectiveFeedback; // icono/child del objetivo a encender
+    [SerializeField] private Collider2D _objectiveTrigger;      // zona de entrega (Trigger)
+    [SerializeField] private GameObject _objectiveFeedback; // icono/child del objetivo a encender
+    [SerializeField] private GameObject _puertaCerrada;
+    [SerializeField] private GameObject _puertaAbierta;
 
     [Header("UI")]
     [SerializeField] private Slider goodSlider;
@@ -28,12 +30,12 @@ public class DeliverObject : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         print("Trigger Enter");
-        if (other == objectiveTrigger) insideObjective = true;
+        if (other == _objectiveTrigger) insideObjective = true;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other == objectiveTrigger) insideObjective = false;
+        if (other == _objectiveTrigger) insideObjective = false;
     }
 
     public bool CanDeliver => isPossessed && insideObjective && !delivered;
@@ -48,8 +50,9 @@ public class DeliverObject : MonoBehaviour
     {
         delivered = true;
         print("delivered true");
-        if (objectiveFeedback) objectiveFeedback.SetActive(true);
+        if (_objectiveFeedback) _objectiveFeedback.SetActive(true);
         if (goodSlider) goodSlider.value += valueToAdd;
+        AbrirPuerta();
 
         // Evita re-triggers mientras destruyes
         var col = GetComponent<Collider2D>();
@@ -57,5 +60,15 @@ public class DeliverObject : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
+    }
+
+    private void AbrirPuerta()
+    {
+        if(_puertaCerrada != null)
+        {
+            _puertaCerrada.GetComponent<Collider2D>().enabled = false;
+            _puertaCerrada.GetComponent<SpriteRenderer>().enabled = false;
+            _puertaAbierta.GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 }
