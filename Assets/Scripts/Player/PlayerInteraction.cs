@@ -97,11 +97,12 @@ namespace Spirit.Player
 
         private void OnTriggerExit2D(Collider2D collider)
         {
+            _insidePossesTrigger = false;
             if (collider.CompareTag("InteractableObject") && _candidate == collider.gameObject)
             {
                 print("EndTrigger");
                 _candidate = null;
-                _insidePossesTrigger= false;
+                _insidePossesTrigger = false;
                 //Vfx para saber que puede interactuar
                 //VFX Objeto Iluminar
             }
@@ -212,14 +213,11 @@ namespace Spirit.Player
             _currentPossessed = obj;
             _possessed = true;
 
-            //_currentPossesedCollider = obj.GetComponent<Collider2D>();
-            //_currentPossesedCollider.enabled = false;
-
             var deliver = _currentPossessed.GetComponent<DeliverObject>();
             if (deliver) deliver.SetPossessed(true);
 
-            _currentPossesedCollider = obj.GetComponent<Collider2D>();
-            if (_currentPossesedCollider) _currentPossesedCollider.enabled = true;
+            //_currentPossesedCollider = obj.GetComponent<Collider2D>();
+            //if (_currentPossesedCollider) _currentPossesedCollider.enabled = false;
 
             _playerSprite.enabled = false;
             obj.transform.SetParent(_possesPos);
@@ -234,23 +232,15 @@ namespace Spirit.Player
         {
             _possessed = false;
             print("Soltar objeto");
-            //_currentPossesedCollider.enabled = true;
             //_currentPossessed.transform.SetParent(null);
 
-            //_playerSprite.enabled = true;
-
-            //_currentPossessed = null;
             if (_currentPossessed)
             {
                 var deliver = _currentPossessed.GetComponent<DeliverObject>();
                 if (deliver) deliver.SetPossessed(false);
             }
 
-            if (_currentPossesedCollider) _currentPossesedCollider.enabled = true;
-
             if (_currentPossessed) _currentPossessed.transform.SetParent(null);
-
-
             if (_playerSprite) _playerSprite.enabled = true;
             _currentPossessed = null;
 

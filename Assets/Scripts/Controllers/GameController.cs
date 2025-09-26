@@ -24,6 +24,11 @@ namespace Spirit
             _gameProgress.heavenAura += aura;
             _uiController.AddAuraHeavenSlider(_gameProgress.heavenAura);
         }
+        public void HellAura(float aura)
+        {
+            _gameProgress.hellAura += aura;
+            _uiController.AddAuraHellSlider(_gameProgress.hellAura);
+        }
 
         public void CompleteLevel()
         {

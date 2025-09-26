@@ -18,19 +18,34 @@ public class DeliverObject : MonoBehaviour
     private bool insideObjective;
     private bool isPossessed;
     private bool delivered;
+    private Collider2D _collider2D;
+
+    private void Awake()
+    {
+        _collider2D = GetComponent<Collider2D>();               
+    }
 
     public void SetPossessed(bool value) => isPossessed = value;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         print("Trigger Enter");
-        if (other == _objectiveTrigger) insideObjective = true;
+        if (other == _objectiveTrigger)
+        {
+            insideObjective = true;
+        }
+
+
         else insideObjective = false;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other == _objectiveTrigger) insideObjective = false;
+        if (other == _objectiveTrigger)
+        {
+            insideObjective = false;
+        }
+        
     }
 
     public bool CanDeliver => isPossessed && insideObjective && !delivered;
