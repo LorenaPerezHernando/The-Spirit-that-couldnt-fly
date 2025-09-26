@@ -1,16 +1,33 @@
+using Spirit.UI;
 using UnityEngine;
 
-public class GameController : Singleton<GameController>
+namespace Spirit
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class GameController : Singleton<GameController>
     {
-        
-    }
+        #region Properties
+        [Header("GameProgress")]
+        public GameProgress GameProgress => _gameProgress;
+        public UIController UIController => _uiController;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        #endregion
+        #region Fields
+
+        [SerializeField] private GameProgress _gameProgress;
+        [SerializeField] private UIController _uiController;
+
+        #endregion
+
+
+        public void HeavenAura(float aura)
+        {
+            _gameProgress.heavenAura += aura;
+            _uiController.AddAuraHeavenSlider(_gameProgress.heavenAura);
+        }
+
+        public void CompleteLevel()
+        {
+            _gameProgress.levelsCompleted++;
+        }
     }
 }

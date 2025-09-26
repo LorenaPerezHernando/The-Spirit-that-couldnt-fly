@@ -1,17 +1,17 @@
+using Spirit;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DeliverObject : MonoBehaviour
 {
-    [Header("Objetivo")]
+    [Header("Objective")]
     [SerializeField] private Collider2D _objectiveTrigger;      // zona de entrega (Trigger)
     [SerializeField] private GameObject _objectiveFeedback; // icono/child del objetivo a encender
     [SerializeField] private GameObject _puertaCerrada;
     [SerializeField] private GameObject _puertaAbierta;
 
-    [Header("UI")]
-    [SerializeField] private Slider goodSlider;
+    [Header("Progress")]
     [SerializeField] private float valueToAdd = 0.7f;
 
     // Estado
@@ -19,18 +19,13 @@ public class DeliverObject : MonoBehaviour
     private bool isPossessed;
     private bool delivered;
 
-    private void Awake()
-    {
-        if (goodSlider == null)
-            goodSlider = FindFirstObjectByType<Slider>(FindObjectsInactive.Include);
-    }
-
     public void SetPossessed(bool value) => isPossessed = value;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         print("Trigger Enter");
         if (other == _objectiveTrigger) insideObjective = true;
+        else insideObjective = false;
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -52,12 +47,14 @@ public class DeliverObject : MonoBehaviour
         print("delivered true");
         if (_objectiveFeedback) _objectiveFeedback.SetActive(true);
         if(_objectiveTrigger) _objectiveTrigger.GetComponent<SpriteRenderer>().enabled = false;
-        if (goodSlider) goodSlider.value += valueToAdd;
+
         AbrirPuerta();
 
-        // Evita re-triggers mientras destruyes
-        var col = GetComponent<Collider2D>();
-        if (col) col.enabled = false;
+        var collider = GetComponent<Collider2D>();
+        if (collider) collider.enabled = false;
+        insideObjective = false;
+
+        GameController.Instance.HeavenAura(valueToAdd);
 
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
