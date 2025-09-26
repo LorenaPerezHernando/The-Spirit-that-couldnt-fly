@@ -27,5 +27,8 @@ public class TrainTrafficLight : MonoBehaviour
         yield return new WaitForSeconds(1);
         _follower.enabled = true;
         _follower.wrapMode = SplineFollower.Wrap.PingPong;
+
+        yield return new WaitForSeconds(1);
+        this.enabled = false;
     }
 }
