@@ -40,7 +40,7 @@ public class DeliverObject : MonoBehaviour
 
     public bool CanDeliver => isPossessed && insideObjective && !delivered;
 
-    public void TryDeliver(MonoBehaviour requester)  // la llama el PlayerInteraction
+    public void TryDeliver(MonoBehaviour requester)  
     {
         if (!CanDeliver) return;
         requester.StartCoroutine(DeliverRoutine());
@@ -51,6 +51,7 @@ public class DeliverObject : MonoBehaviour
         delivered = true;
         print("delivered true");
         if (_objectiveFeedback) _objectiveFeedback.SetActive(true);
+        if(_objectiveTrigger) _objectiveTrigger.GetComponent<SpriteRenderer>().enabled = false;
         if (goodSlider) goodSlider.value += valueToAdd;
         AbrirPuerta();
 
