@@ -34,5 +34,17 @@ namespace Spirit
         {
             _gameProgress.levelsCompleted++;
         }
+
+        public void AddRecolectableBackground(int recolectable)
+        {
+            _gameProgress.recolectablesBackground += recolectable;
+        }
+
+        public void RegisterBackgroundPickup(int backgroundId)
+        {
+            _gameProgress.AddPendingBackground(backgroundId);
+            // TODO SaveSystem.Save(_gameProgress); 
+        }
+
     }
 }
