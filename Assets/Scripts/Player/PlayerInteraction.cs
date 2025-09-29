@@ -37,6 +37,11 @@ namespace Spirit.Player
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            if (collision.CompareTag("Portal"))
+            {
+                _sceneLoaderPortal = collision.gameObject.GetComponent<SceneLoader>();
+                _insideSceneTrigger = true;
+            }
             if (collision.CompareTag("InteractableObject"))
             {
                 Debug.Log("Poses");
@@ -56,16 +61,16 @@ namespace Spirit.Player
                 _candidatePossesOnly = collision.gameObject;
                 _insidePossesTrigger = true;
             }
+            
+        }
+
+        private void OnTriggerStay2D(Collider2D collision)
+        {
             if (collision.CompareTag("Portal"))
             {
                 _sceneLoaderPortal = collision.gameObject.GetComponent<SceneLoader>();
                 _insideSceneTrigger = true;
             }
-        }
-
-        private void OnTriggerStay2D(Collider2D collision)
-        {
-
             if (collision.CompareTag("InteractableObject"))
             {
                 Debug.Log("Poses");
@@ -87,11 +92,7 @@ namespace Spirit.Player
                 _insidePossesTrigger = true;
                 //Todo vfx blue
             }
-            if (collision.CompareTag("Portal"))
-            {
-                _sceneLoaderPortal = collision.gameObject.GetComponent<SceneLoader>();
-                _insideSceneTrigger = true;
-            }
+            
         }
 
 
@@ -119,6 +120,7 @@ namespace Spirit.Player
             }
             if (collider.CompareTag("Portal"))
             {
+                print("End Trigger portal");
                 _insideSceneTrigger = false;
                 _sceneLoaderPortal= null;
             }
@@ -254,10 +256,6 @@ namespace Spirit.Player
             _sceneLoaderPortal.LoadSceneByIndex(_sceneLoaderPortal._sceneToLoad);
         }
 
-        private void OnAttack(InputValue input)
-        {
-
-        }
     }
 }
 
