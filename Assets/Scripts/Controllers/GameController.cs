@@ -12,13 +12,16 @@ namespace Spirit
 
         #endregion
         #region Fields
-
+        [SerializeField] private Transform _player;
         [SerializeField] private GameProgress _gameProgress;
         [SerializeField] private UIController _uiController;
 
         #endregion
 
-
+        public void NextInitialPos(Transform posInitial)
+        {
+            _player.position = posInitial.position;
+        }
         public void HeavenAura(float aura)
         {
             _gameProgress.heavenAura += aura;

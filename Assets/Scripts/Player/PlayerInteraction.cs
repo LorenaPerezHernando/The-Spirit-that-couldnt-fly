@@ -238,7 +238,7 @@ namespace Spirit.Player
 
         private void PortalTrigger()
         {
-            _sceneLoaderPortal.LoadSceneByIndex(_sceneLoaderPortal._sceneToLoad);
+            _sceneLoaderPortal.LoadSceneByIndex(_sceneLoaderPortal.sceneToLoad);
         }
 
     }
