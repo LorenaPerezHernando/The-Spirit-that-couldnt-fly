@@ -41,6 +41,7 @@ namespace Spirit.Player
             {
                 _sceneLoaderPortal = collision.gameObject.GetComponent<SceneLoader>();
                 _insideSceneTrigger = true;
+                
             }
             if (collision.CompareTag("InteractableObject"))
             {
@@ -169,23 +170,7 @@ namespace Spirit.Player
                 ExitPossessed();               // soltar/terminar siempre tras pulsar
                 return;
             }
-            //print("Interact");
-            //if (_possessed)
-            //{
-            //    GameObject newTarget = _candidatePossesOnly != null ? _candidatePossesOnly
-            //        : (_candidate != null && _candidate != _currentPossessed ? _candidate : null);
 
-            //    if (newTarget != null)
-            //    {
-            //       ExitPossessed();
-            //       PossessObject(newTarget);
-
-            //    }
-            //    else
-            //    {
-            //        ExitPossessed();
-            //    }
-            //}
             if (_insidePossesTrigger)
             {
                 if (_candidatePossesOnly != null)
@@ -203,7 +188,7 @@ namespace Spirit.Player
             if (_insideSceneTrigger)
             {
                 PortalTrigger();
-                print("portal");
+                print("Portal");
             }
 
         }
