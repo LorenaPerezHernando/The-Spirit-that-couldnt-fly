@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7813960313823249926}
   - component: {fileID: 4461155819826044843}
   m_Layer: 0
-  m_Name: RecolectableBackground
+  m_Name: RecolectableMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
