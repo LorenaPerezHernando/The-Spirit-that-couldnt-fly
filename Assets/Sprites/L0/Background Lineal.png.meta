@@ -117,9 +117,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 505
-        width: 128
-        height: 125
+        y: 426
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,10 +138,10 @@ TextureImporter:
       name: Background Lineal_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 505
-        width: 128
-        height: 125
+        x: 204
+        y: 426
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,10 +160,10 @@ TextureImporter:
       name: Background Lineal_2
       rect:
         serializedVersion: 2
-        x: 256
-        y: 505
-        width: 128
-        height: 125
+        x: 408
+        y: 426
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,10 +182,10 @@ TextureImporter:
       name: Background Lineal_3
       rect:
         serializedVersion: 2
-        x: 384
-        y: 505
-        width: 128
-        height: 125
+        x: 612
+        y: 426
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +204,10 @@ TextureImporter:
       name: Background Lineal_4
       rect:
         serializedVersion: 2
-        x: 512
-        y: 505
-        width: 128
-        height: 125
+        x: 816
+        y: 426
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,10 +226,10 @@ TextureImporter:
       name: Background Lineal_5
       rect:
         serializedVersion: 2
-        x: 640
-        y: 505
-        width: 128
-        height: 125
+        x: 0
+        y: 226
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,10 +248,10 @@ TextureImporter:
       name: Background Lineal_6
       rect:
         serializedVersion: 2
-        x: 768
-        y: 505
-        width: 128
-        height: 125
+        x: 204
+        y: 226
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -270,10 +270,10 @@ TextureImporter:
       name: Background Lineal_7
       rect:
         serializedVersion: 2
-        x: 896
-        y: 505
-        width: 128
-        height: 125
+        x: 408
+        y: 226
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,10 +292,10 @@ TextureImporter:
       name: Background Lineal_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 380
-        width: 128
-        height: 125
+        x: 612
+        y: 226
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -314,10 +314,10 @@ TextureImporter:
       name: Background Lineal_9
       rect:
         serializedVersion: 2
-        x: 128
-        y: 380
-        width: 128
-        height: 125
+        x: 816
+        y: 226
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -336,10 +336,10 @@ TextureImporter:
       name: Background Lineal_10
       rect:
         serializedVersion: 2
-        x: 256
-        y: 380
-        width: 128
-        height: 125
+        x: 0
+        y: 26
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -358,10 +358,10 @@ TextureImporter:
       name: Background Lineal_11
       rect:
         serializedVersion: 2
-        x: 384
-        y: 380
-        width: 128
-        height: 125
+        x: 204
+        y: 26
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -380,10 +380,10 @@ TextureImporter:
       name: Background Lineal_12
       rect:
         serializedVersion: 2
-        x: 512
-        y: 380
-        width: 128
-        height: 125
+        x: 408
+        y: 26
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -402,10 +402,10 @@ TextureImporter:
       name: Background Lineal_13
       rect:
         serializedVersion: 2
-        x: 640
-        y: 380
-        width: 128
-        height: 125
+        x: 612
+        y: 26
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -424,10 +424,10 @@ TextureImporter:
       name: Background Lineal_14
       rect:
         serializedVersion: 2
-        x: 768
-        y: 380
-        width: 128
-        height: 125
+        x: 816
+        y: 26
+        width: 204
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -438,556 +438,6 @@ TextureImporter:
       bones: []
       spriteID: 8aee96c8ffa8f264a9f0bb718c743aa4
       internalID: -710757739
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_15
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 380
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0db076cf6f4ee4145a0bac1af317449e
-      internalID: -1278592080
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_16
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 255
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 94f46f861b1b01d4283a63be2644aacd
-      internalID: -608064036
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_17
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 255
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8fdc15e77da04144d87e78eee5338129
-      internalID: 1451094248
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_18
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 255
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0fa085154c3ab5b45849c72eb7243b90
-      internalID: -676827754
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_19
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 255
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4005010b5adc08e448ac0f3d65684711
-      internalID: -500318893
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_20
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 255
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 32f9d627b4851674391922abb0bbba2d
-      internalID: -1524840888
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_21
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 255
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cb8a01c558ff49e4088faf7ec8bf1d75
-      internalID: -949603843
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_22
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 255
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 36aa1e747453b8f48a4532dea0c9e3de
-      internalID: 1981131842
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_23
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 255
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 637b123b53e74ca49ba81b6ee4c62de9
-      internalID: 183730416
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_24
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 130
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d401fb8293e7581449659536141b1eb7
-      internalID: -629070091
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_25
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 130
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b250dc7f65c6ac749956927a984771ea
-      internalID: 1325176581
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_26
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 130
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 39a9fd93064833b4092d0bf943d0b38d
-      internalID: -133996597
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_27
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 130
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bbb26135b7f7fd746b6f9cf834315427
-      internalID: 1913035609
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_28
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 130
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf8d424d44c9df547b98ceafbfcc0f21
-      internalID: -697640792
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_29
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 130
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f67be54d9bd58c84ea655e6a25a14450
-      internalID: 809391134
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_30
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 130
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d3a6b39f16c07724e9d9d938e56b5386
-      internalID: 1759862800
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_31
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 130
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0b0560c40c989234ab2452608c0d50c1
-      internalID: -754261366
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_32
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 5
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: edc2406124d85f549b424b5259710787
-      internalID: 2105633340
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_33
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 5
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9f226234edb9bc54da9a191db80108d9
-      internalID: 1535010785
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_34
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 5
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c4822901066ab234b9ab09959bf74541
-      internalID: -377666542
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_35
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 5
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 60361bf8d59ccab479f0ef1c4c1d7820
-      internalID: 2045179300
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_36
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 5
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 28b61d6de68a25e439f0bc7d3135f35a
-      internalID: 1229443864
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_37
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 5
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6174cfdb550a7094188408b951deaf84
-      internalID: -1100493469
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_38
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 5
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9aab94480f58e1c4996caceaa212b55b
-      internalID: -341414286
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Background Lineal_39
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 5
-        width: 128
-        height: 125
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: acef5161da04e0e4eb6676848c7ebf49
-      internalID: 1832522801
       vertices: []
       indices: 
       edges: []
@@ -1013,33 +463,8 @@ TextureImporter:
       Background Lineal_12: -1297974006
       Background Lineal_13: -227625018
       Background Lineal_14: -710757739
-      Background Lineal_15: -1278592080
-      Background Lineal_16: -608064036
-      Background Lineal_17: 1451094248
-      Background Lineal_18: -676827754
-      Background Lineal_19: -500318893
       Background Lineal_2: 885336178
-      Background Lineal_20: -1524840888
-      Background Lineal_21: -949603843
-      Background Lineal_22: 1981131842
-      Background Lineal_23: 183730416
-      Background Lineal_24: -629070091
-      Background Lineal_25: 1325176581
-      Background Lineal_26: -133996597
-      Background Lineal_27: 1913035609
-      Background Lineal_28: -697640792
-      Background Lineal_29: 809391134
       Background Lineal_3: 922716832
-      Background Lineal_30: 1759862800
-      Background Lineal_31: -754261366
-      Background Lineal_32: 2105633340
-      Background Lineal_33: 1535010785
-      Background Lineal_34: -377666542
-      Background Lineal_35: 2045179300
-      Background Lineal_36: 1229443864
-      Background Lineal_37: -1100493469
-      Background Lineal_38: -341414286
-      Background Lineal_39: 1832522801
       Background Lineal_4: 1591808501
       Background Lineal_5: 433738392
       Background Lineal_6: -2084819559

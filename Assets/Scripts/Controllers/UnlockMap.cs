@@ -14,7 +14,7 @@ public class UnlockMap : MonoBehaviour
         public string trigger = "Play";
         public float fallbackDuration = 2f;
     }
-
+    private string trigger = "Play";
     [SerializeField] private List<Map> _bindings = new();
     [SerializeField] private AnimationQueueRecolectables _queue;
 
@@ -39,13 +39,16 @@ public class UnlockMap : MonoBehaviour
         }
     }
 
-    private IEnumerator PlayUnlockRoutine(int id, Map b)
+    private IEnumerator PlayUnlockRoutine(int id, Map map)
     {
-        b.animator.ResetTrigger(b.trigger);
-        b.animator.SetTrigger(b.trigger);
-        yield return new WaitForSeconds(b.fallbackDuration);
-
-        GameController.Instance.GameProgress.MarkBackgroundCollected(id);
+        map.animator.ResetTrigger(map.trigger);
+        map.animator.SetTrigger(map.trigger);
+        yield return new WaitForSeconds(map.fallbackDuration);
+        if (map.targetToActivate)
+            map.targetToActivate.gameObject.SetActive(true);
+            GameController.Instance.GameProgress.MarkBackgroundCollected(id);
+        
         // Aquí: activar la imagen, UI “nuevo fondo”, guardar, etc.
+        
     }
 }

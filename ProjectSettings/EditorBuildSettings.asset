@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Portal 2 Primaria.unity
     guid: e46823fa78872854eaaf4beb75cb00fd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Prefab Scenes.unity
     guid: 9528839d33ff2874cb07d7f65628659c
   m_configObjects:
