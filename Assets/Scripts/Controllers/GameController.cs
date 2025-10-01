@@ -12,7 +12,12 @@ namespace Spirit
 
         #endregion
         #region Fields
+        [Header("Player")]
         [SerializeField] private Transform _player;
+        [SerializeField] private GameObject _demonPlayer;
+        [SerializeField] private GameObject _angelPlayer;
+
+        [Header("GameProgress")]
         [SerializeField] private GameProgress _gameProgress;
         [SerializeField] private UIController _uiController;
 
@@ -25,12 +30,24 @@ namespace Spirit
         public void HeavenAura(float aura)
         {
             _gameProgress.heavenAura += aura;
-            _uiController.AddAuraHeavenSlider(_gameProgress.heavenAura);
+            _uiController.AddAuraHeavenSlider(_gameProgress.heavenAura);        
         }
         public void HellAura(float aura)
         {
             _gameProgress.hellAura += aura;
-            _uiController.AddAuraHellSlider(_gameProgress.hellAura);
+            _uiController.AddAuraHellSlider(_gameProgress.hellAura);            
+        }
+
+        public void ChangeApearenceToDemon()
+        {
+            _demonPlayer.SetActive(true);
+            _angelPlayer.SetActive(false);
+        }
+
+        public void ChangeApearenceToAngel()
+        {
+            _demonPlayer.SetActive(false);
+            _angelPlayer.SetActive(true);
         }
 
         public void CompleteLevel()
