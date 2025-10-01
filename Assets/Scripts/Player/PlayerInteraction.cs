@@ -7,20 +7,25 @@ namespace Spirit.Player
 {
     public class PlayerInteraction : MonoBehaviour
     {
+        [Header ("VFX")]
+        [SerializeField] private SpriteRenderer _thirdEye;
+        [SerializeField] private ParticleSystem _magicPoof;
+
         [Header("Interactable Action")]
-        [SerializeField] private GameObject _currentPossessed;
-        [SerializeField] private Collider2D _currentPossesedCollider;
-        [SerializeField] private GameObject _candidate;
+        private GameObject _currentPossessed;
+        private Collider2D _currentPossesedCollider;
+        private GameObject _candidate;
         [SerializeField] private Transform _possesPos;
         [SerializeField] private bool _insidePossesTrigger;
         [SerializeField] private bool _possessed;
         private SpriteRenderer _playerSprite;
+        
 
         [Header("Burn or Possess Only")]
         [SerializeField] private Slider _badSlider;
-        [SerializeField] private GameObject _candidateBurnOnly;
-        [SerializeField] private SpriteRenderer _candidateBurnChild;
-        [SerializeField] private GameObject _candidatePossesOnly;
+        private GameObject _candidateBurnOnly;
+        private SpriteRenderer _candidateBurnChild;
+        private GameObject _candidatePossesOnly;
 
         [Header("Next Scene")]
         [SerializeField] private bool _insideSceneTrigger;
@@ -162,6 +167,7 @@ namespace Spirit.Player
         {
             if (_possessed && _currentPossessed != null)
             {
+                
                 var deliver = _currentPossessed.GetComponent<DeliverObject>();
                 if (deliver != null && deliver.CanDeliver)
                 {
@@ -199,6 +205,8 @@ namespace Spirit.Player
             print("Possesmethod");
             _currentPossessed = obj;
             _possessed = true;
+            _thirdEye.enabled = false;
+            _magicPoof.Play();
 
             var deliver = _currentPossessed.GetComponent<DeliverObject>();
             if (deliver) deliver.SetPossessed(true);
@@ -217,6 +225,7 @@ namespace Spirit.Player
 
         private void ExitPossessed()
         {
+            _thirdEye.enabled = true;
             _possessed = false;
             print("Soltar objeto");
             //_currentPossessed.transform.SetParent(null);
