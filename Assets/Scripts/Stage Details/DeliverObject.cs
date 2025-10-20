@@ -61,9 +61,10 @@ public class DeliverObject : MonoBehaviour
         delivered = true;
         print("delivered true");
         if (_objectiveFeedback) _objectiveFeedback.SetActive(true);
-        if(_objectiveTrigger) _objectiveTrigger.GetComponent<SpriteRenderer>().enabled = false;
+        /*if(_objectiveTrigger)*/ _objectiveTrigger.GetComponent<SpriteRenderer>().enabled = false;
 
-        AbrirPuerta();
+        if(_puertaCerrada != null)
+            AbrirPuerta();
 
         var collider = GetComponent<Collider2D>();
         if (collider) collider.enabled = false;
