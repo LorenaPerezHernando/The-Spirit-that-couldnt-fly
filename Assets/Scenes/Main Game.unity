@@ -2033,6 +2033,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameControllers
       objectReference: {fileID: 0}
+    - target: {fileID: 247814615403327168, guid: 26c684e19d5f64f47b026b9f85a4db04, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.2099915
+      objectReference: {fileID: 0}
     - target: {fileID: 393529499544376098, guid: 26c684e19d5f64f47b026b9f85a4db04, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2092,6 +2096,22 @@ PrefabInstance:
     - target: {fileID: 4640146739519976348, guid: 26c684e19d5f64f47b026b9f85a4db04, type: 3}
       propertyPath: m_SortingOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331525149154027233, guid: 26c684e19d5f64f47b026b9f85a4db04, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393776557067997000, guid: 26c684e19d5f64f47b026b9f85a4db04, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -43.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393776557067997000, guid: 26c684e19d5f64f47b026b9f85a4db04, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 38.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8295087167723237262, guid: 26c684e19d5f64f47b026b9f85a4db04, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8819303575118021171, guid: 26c684e19d5f64f47b026b9f85a4db04, type: 3}
       propertyPath: _angelPlayer
